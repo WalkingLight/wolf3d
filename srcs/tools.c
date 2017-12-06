@@ -55,7 +55,7 @@ int			ft_linelen(char *buf, int k)
 
 void		ft_instructions(void)
 {
-	ft_putendl("---------- INSTRUCTIONS ----------");
+	ft_putendl("------- INSTRUCTIONS -------");
 	ft_putendl("< > : rotate camera");
 	ft_putendl("^ v : move forward and back");
 	ft_putendl("ESC : close");

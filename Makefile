@@ -47,6 +47,7 @@ norm:
 clean:
 	@rm -f $(OBJECTS)
 	@make clean -C $(LIB_DIR)
+	@rm -f $(NAME).DSYM
 	@echo "$(WARN)clean complete$(NONE)"
 
 fclean: clean

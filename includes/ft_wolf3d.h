@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOLF3D_H
-# define WOLF3D_H
+#ifndef FT_WOLF3D_H
+# define FT_WOLF3D_H
 
 # include "../libft/includes/libft.h"
 # include <mlx.h>

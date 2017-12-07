@@ -14,7 +14,7 @@
 
 static void		ft_put_pixel(t_var *f, int x, int y, int colour)
 {
-	int			i;
+	int				i;
 	unsigned int	p;
 
 	i = 0;
@@ -29,7 +29,7 @@ static void		ft_put_pixel(t_var *f, int x, int y, int colour)
 
 static int		ft_wall_colour(t_var *f)
 {
-	int			colour;
+	int				colour;
 
 	if (f->draw.side == 0 && f->cam.xdir >= 0)
 		colour = 0xFE0000;
@@ -44,7 +44,7 @@ static int		ft_wall_colour(t_var *f)
 	return (colour);
 }
 
-static void	ft_draw_init(t_var *f)
+static void		ft_draw_init(t_var *f)
 {
 	f->cam.x = 2 * f->draw.x / (double)WIN_W - 1;
 	f->draw.side = 0;
@@ -59,10 +59,10 @@ static void	ft_draw_init(t_var *f)
 	f->draw.ydelta_dist = sqrt(1 + pow(f->cam.xdir / f->cam.ydir, 2));
 }
 
-static void	ft_draw_slice(t_var *f)
+static void		ft_draw_slice(t_var *f)
 {
-	int		y;
-	int		colour;
+	int				y;
+	int				colour;
 
 	y = 0;
 	while (y < WIN_H)
@@ -81,7 +81,7 @@ static void	ft_draw_slice(t_var *f)
 	}
 }
 
-void		ft_draw(t_var *f)
+void			ft_draw(t_var *f)
 {
 	f->draw.x = 0;
 	while (f->draw.x < WIN_W)

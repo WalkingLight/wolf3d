@@ -23,7 +23,7 @@ static int	ft_rotate(int keycode, double tmp_dir, double tmp_plane, t_var *f)
 		f->cam.xplane = f->cam.xplane * cos(0.05)
 			- f->cam.yplane * sin(0.05);
 		f->cam.yplane = tmp_plane * sin(0.05)
-			+f->cam.yplane * cos(0.05);
+			+ f->cam.yplane * cos(0.05);
 	}
 	if (keycode == 124 || keycode == 2)
 	{
@@ -34,7 +34,7 @@ static int	ft_rotate(int keycode, double tmp_dir, double tmp_plane, t_var *f)
 		f->cam.xplane = f->cam.xplane * cos(-0.05)
 			- f->cam.yplane * sin(-0.05);
 		f->cam.yplane = tmp_plane * sin(-0.05)
-			+f->cam.yplane * cos(-0.05);
+			+ f->cam.yplane * cos(-0.05);
 	}
 	ft_draw(f);
 	return (0);

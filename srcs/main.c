@@ -67,7 +67,7 @@ static char		**ft_getmap(char *buf, int nbl)
 		i = 0;
 		if (!(map[j] = (char *)malloc(sizeof(char) * ft_linelen(buf, k))))
 			return (NULL);
-		while(buf[k] != '\n' && buf[k] != '\0')
+		while (buf[k] != '\n' && buf[k] != '\0')
 			map[j][i++] = buf[k++];
 		map[j][i] = '\0';
 		k++;

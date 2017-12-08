@@ -44,7 +44,8 @@ static void	ft_hit(t_var *f)
 {
 	while (f->draw.hit != 1 && f->draw.ymap > 0 && \
 			f->draw.ymap < ft_linelen(f->map[f->draw.xmap], 0) && \
-			f->draw.xmap > 0 && f->draw.xmap <= f->nbl)
+			f->draw.xmap > 0 && f->draw.xmap <= f->nbl && \
+			f->map[f->draw.xmap][f->draw.ymap] != '\0')
 	{
 		if (f->draw.xside_dist < f->draw.yside_dist)
 		{

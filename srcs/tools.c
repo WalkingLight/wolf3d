@@ -12,6 +12,26 @@
 
 #include "ft_wolf3d.h"
 
+void		ft_print(char **arr)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (arr[i] != '\0')
+	{
+		ft_putstr(ft_itoa(i));
+		while (arr[i][j] != '\0')
+		{
+			ft_putchar(arr[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}
+
 int			ft_player_init(t_var *f)
 {
 	int		j;

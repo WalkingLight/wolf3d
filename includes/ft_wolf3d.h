@@ -83,5 +83,6 @@ int				ft_linelen(char *buf, int k);
 int				key_press(int keycode, t_var *f);
 void			ft_draw(t_var *f);
 void			ft_raycast(t_var *f);
+void			ft_print(char **arr);
 
 #endif

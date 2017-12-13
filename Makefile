@@ -6,7 +6,7 @@
 #    By: rheukelm <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/27 10:33:15 by rheukelm          #+#    #+#              #
-#    Updated: 2017/06/27 10:33:22 by rheukelm         ###   ########.fr        #
+#    Updated: 2017/12/13 09:50:59 by rheukelm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ WARN = \x1b[33;01m
 
 NAME = wolf3d
 LIB_DIR = libft
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g -g3
 HEADERS = includes
 
 SRCS = 	srcs/main.c	\
@@ -47,7 +47,7 @@ norm:
 clean:
 	@rm -f $(OBJECTS)
 	@make clean -C $(LIB_DIR)
-	@rm -f $(NAME).DSYM
+	@rm -rf $(NAME).DSYM
 	@echo "$(WARN)clean complete$(NONE)"
 
 fclean: clean

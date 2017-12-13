@@ -1,0 +1,38 @@
+➜  tmaske git:(master) ✗ lldb ./wolf3d maps/lvl1
+(lldb) target create "./wolf3d"
+Current executable set to './wolf3d' (x86_64).
+(lldb) settings set -- target.run-args  "maps/lvl1"
+(lldb) run
+Process 54271 launched: './wolf3d' (x86_64)
+------- INSTRUCTIONS -------
+< > : rotate camera
+^ v : move forward and back
+ESC : close
+Process 54271 stopped
+* thread #1: tid = 0xa5e7ef, 0x0000000100002dd5 wolf3d`ft_hit(f=0x0000000100600020) + 437 at raycast.c:62, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=EXC_I386_GPFLT)
+    frame #0: 0x0000000100002dd5 wolf3d`ft_hit(f=0x0000000100600020) + 437 at raycast.c:62
+   59  				f->draw.ymap += f->draw.ystep;
+   60  				f->draw.yside_dist += f->draw.ydelta_dist;
+   61  			}
+-> 62  			if (f->map[f->draw.xmap][f->draw.ymap] == '1')
+   63  				f->draw.hit = 1;
+   64  		}
+   65  	}
+(lldb) print f
+(t_var *) $0 = 0x0000000100600020
+(lldb) image lookup -a 0x0000000100600020
+(lldb) print f->draw.xmap
+(int) $1 = 2
+(lldb) print f->draw.ymap
+(int) $2 = 6
+(lldb) print f->map
+(char **) $3 = 0x00000001005141f0
+(lldb) print 0x00000001005141f0
+(long) $4 = 4300292592
+(lldb) print char* 0x00000001005141f0
+error: expected unqualified-id
+(lldb) print f->map[f->draw.xmap][f->draw.ymap]
+error: Couldn't apply expression side effects : Couldn't dematerialize a result variable: couldn't read its memory
+(lldb) print f->map[f->draw.xmap]
+(char *) $6 = 0x65746172656e6567 ""
+(lldb)

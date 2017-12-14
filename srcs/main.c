@@ -62,6 +62,7 @@ static char		**ft_getmap(char *buf, int nbl)
 		return (NULL);
 	if (!(map = (char **)malloc(sizeof(char) * nbl)))
 		return (NULL);
+	printf("nbl->%d", nbl);
 	while (buf[k] != '\0' && j < nbl)
 	{
 		i = 0;
@@ -71,11 +72,11 @@ static char		**ft_getmap(char *buf, int nbl)
 		{
 			map[j][i++] = buf[k++];
 		}
-		printf("%d -> %c\n", j, buf[k]);
 		map[j][i] = '\0';
 		k++;
 		j++;
 	}
+	ft_print(map);
 	return (map);
 }
 
@@ -117,7 +118,6 @@ int				main(int argc, char **argv)
 	}
 	if ((f = init_mlx(argv[1])) != NULL)
 	{
-		ft_print(f->map);
 		ft_instructions();
 		ft_draw(f);
 		mlx_hook(f->win, 2, (1L << 0), key_press, f);

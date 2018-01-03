@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_wolf3d.h"
-
+/*
 static int		ft_open(char *file, int *fd)
 {
 	if (BUFF_SIZE < 1)
@@ -79,11 +79,23 @@ static char		**ft_getmap(char *buf, int nbl)
 	ft_print(map);
 	return (map);
 }
+*/
+
+void			get_map(t_var *f, char *file)
+{
+	char	*str;
+	int		*fd;
+
+	str = NULL:
+	if ((*fd = open(file, O_RDONLY)) == -1)
+		ft_putendl_fd("error: could not read file", 2);
+	while ()
+}
 
 static t_var	*init_mlx(char *fd)
 {
 	t_var	*f;
-	char	*buf;
+//	char	*buf;
 	char	*name;
 
 	name = ft_strjoin("wolf3d :", fd);
@@ -96,10 +108,11 @@ static t_var	*init_mlx(char *fd)
 	free(name);
 	f->imgdata = mlx_get_data_addr(f->img, &f->bpp, &f->size_line,
 			&f->endian);
-	buf = ft_readbuf(fd, &(f->nbl));
-	if ((f->map = ft_getmap(buf, f->nbl)) == NULL)
-		return (NULL);
-	free(buf);
+//	buf = ft_readbuf(fd, &(f->nbl));
+//	if ((f->map = ft_getmap(buf, f->nbl)) == NULL)
+//		return (NULL);
+//	free(buf);
+	get_map(f, fd);
 	if (ft_player_init(f) == -1)
 		return (NULL);
 	f->cam.xplane = 0.0;

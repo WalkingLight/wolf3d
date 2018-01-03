@@ -62,7 +62,7 @@ static char		**ft_getmap(char *buf, int nbl)
 		return (NULL);
 	if (!(map = (char **)malloc(sizeof(char) * nbl)))
 		return (NULL);
-	printf("nbl->%d", nbl);
+	printf("nbl->%d\n", nbl);
 	while (buf[k] != '\0' && j < nbl)
 	{
 		i = 0;

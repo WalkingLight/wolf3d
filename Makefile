@@ -28,16 +28,16 @@ SRCS = 	srcs/main.c	\
 OBJECTS = $(SRCS:.c=.o)
 
 $(NAME): $(LIB_DIR)/libft.a $(OBJECTS)
-	@$gcc $(FLAGS) -L $(LIB_DIR) -l ft -o $@ $^ -lmlx -framework OpenGl -framework Appkit
+	gcc $(FLAGS) -L $(LIB_DIR) -l ft -o $@ $^ -lmlx -framework OpenGl -framework Appkit
 	@echo "$(OK)compiling [ $(NAME) ] success$(NONE)"
 
 $(LIB_DIR)/libft.a :
-	@$(MAKE) -C $(LIB_DIR)
+	$(MAKE) -C $(LIB_DIR)
 
 all: $(NAME)
 
 %.o: %.c $(HEADERS)/ft_wolf3d.h
-	@$gcc $(FLAGS) -I $(HEADERS) -c $< -o $@
+	gcc $(FLAGS) -I $(HEADERS) -c $< -o $@
 
 norm:
 	@echo "$(OK)Norminette$(NONE)"

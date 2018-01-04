@@ -16,7 +16,7 @@ WARN = \x1b[33;01m
 
 NAME = wolf3d
 LIB_DIR = libft
-FLAGS = -Wall -Werror -Wextra -g -g3
+FLAGS = -Wall -Werror -Wextra -g
 HEADERS = includes
 
 SRCS = 	srcs/main.c	\
@@ -47,7 +47,7 @@ norm:
 clean:
 	@rm -f $(OBJECTS)
 	@make clean -C $(LIB_DIR)
-	@rm -rf $(NAME).DSYM
+	#@rm -rf $(NAME).DSYM
 	@echo "$(WARN)clean complete$(NONE)"
 
 fclean: clean

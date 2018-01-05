@@ -11,75 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_wolf3d.h"
-/*
-static int		ft_open(char *file, int *fd)
-{
-	if (BUFF_SIZE < 1)
-	{
-		ft_putendl_fd("error: BUFF_SIZE must be greater than 0", 2);
-		return (-1);
-	}
-	if ((*fd = open(file, O_RDONLY)) == -1)
-	{
-		ft_putendl_fd("error: could not read file", 2);
-		return (-1);
-	}
-	return (1);
-}
-
-static char		*ft_readbuf(char *file, int *nbl)
-{
-	int			fd;
-	char		*buf;
-	char		*line;
-
-	buf = ft_strnew(1);
-	if (ft_open(file, &fd) == -1)
-		return (NULL);
-	while (get_next_line(fd, &line) > 0 && (*nbl)++ > -1)
-	{
-		buf = ft_strjoin(ft_strjoin(buf, line), "\n");
-		free(line);
-	}
-	if (close(fd) == -1)
-	{
-		ft_putendl_fd("error: could not close connection to file", 2);
-		return (NULL);
-	}
-	return (buf);
-}
-
-static char		**ft_getmap(char *buf, int nbl)
-{
-	int			i;
-	int			k;
-	int			j;
-	char		**map;
-
-	k = 0;
-	j = 0;
-	if (!buf)
-		return (NULL);
-	if (!(map = (char **)malloc(sizeof(char) * nbl)))
-		return (NULL);
-	printf("nbl->%d\n", nbl);
-	while (buf[k] != '\0' && j < nbl)
-	{
-		i = 0;
-		if (!(map[j] = (char *)malloc(sizeof(char) * ft_linelen(buf, k))))
-			return (NULL);
-		while (buf[k] != '\n' && buf[k] != '\0')
-		{
-			map[j][i++] = buf[k++];
-		}
-		map[j][i] = '\0';
-		k++;
-		j++;
-	}
-	ft_print(map);
-	return (map);
-}
-*/
 
 int				check_map(char *file)
 {
@@ -94,7 +25,6 @@ int				check_map(char *file)
 	while (get_next_line(fd, &line))
 	{
 		i = 0;
-		printf("read -> '%s'\n", line);
 		while (line[i] != '\0')
 		{
 			if (!(line[i] == '0' || line[i] == '1' || line[i] == 'x'))
@@ -108,7 +38,6 @@ int				check_map(char *file)
 		num++;
 	}
 	close(fd);
-	printf("nbl -> %d\n", num - 1);
 	return (num - 1);
 }
 
@@ -170,10 +99,10 @@ int				main(int argc, char **argv)
 	}
 	if ((f = init_mlx(argv[1])) != NULL)
 	{
-		ft_print(f->map);
 		ft_instructions();
 		ft_draw(f);
 		mlx_hook(f->win, 2, (1L << 0), key_press, f);
+		mlx_hook(f->win, 17, 0L, &ft_close, f);
 		mlx_loop(f->mlx);
 		mlx_destroy_window(f->mlx, f->win);
 	}

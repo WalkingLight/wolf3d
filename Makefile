@@ -28,16 +28,19 @@ SRCS = 	srcs/main.c	\
 OBJECTS = $(SRCS:.c=.o)
 
 $(NAME): $(LIB_DIR)/libft.a $(OBJECTS)
-	gcc $(FLAGS) -L $(LIB_DIR) -l ft -o $@ $^ -lmlx -framework OpenGl -framework Appkit
+	@gcc $(FLAGS) -L $(LIB_DIR) -l ft -o $@ $^ -lmlx -framework OpenGl -framework Appkit
 	@echo "$(OK)compiling [ $(NAME) ] success$(NONE)"
 
 $(LIB_DIR)/libft.a :
-	$(MAKE) -C $(LIB_DIR)
+	@$(MAKE) -C $(LIB_DIR)
 
 all: $(NAME)
 
 %.o: %.c $(HEADERS)/ft_wolf3d.h
-	gcc $(FLAGS) -I $(HEADERS) -c $< -o $@
+	@gcc $(FLAGS) -I $(HEADERS) -c $< -o $@
+
+bug:
+	gcc -Wall -Werror -Wextra -g -L libft -l ft libft/libft.a srcs/main.c srcs/draw.c srcs/tools.c srcs/raycast.c srcs/key.c -lmlx -framework OpenGl -framework Appkit
 
 norm:
 	@echo "$(OK)Norminette$(NONE)"
@@ -47,7 +50,7 @@ norm:
 clean:
 	@rm -f $(OBJECTS)
 	@make clean -C $(LIB_DIR)
-	#@rm -rf $(NAME).DSYM
+	@rm -rf $(NAME).DSYM
 	@echo "$(WARN)clean complete$(NONE)"
 
 fclean: clean

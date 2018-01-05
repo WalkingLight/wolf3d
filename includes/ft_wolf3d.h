@@ -84,6 +84,6 @@ int				key_press(int keycode, t_var *f);
 void			ft_draw(t_var *f);
 void			ft_raycast(t_var *f);
 void			ft_print(char **arr);
-void			closeProg(t_var *f);
+int				ft_close(void);
 
 #endif

@@ -12,24 +12,8 @@
 
 #include "ft_wolf3d.h"
 
-void		ft_print(char **arr)
+int			ft_close(void)
 {
-	while (*arr)
-		printf("%s\n", *arr++);
-}
-
-void		closeProg(t_var *f)
-{
-	int		i;
-
-	i = 0;
-	while (i < f->nbl)
-	{
-		free(f->map[i]);
-		i++;
-	}
-	free(f->map);
-	mlx_clear_window(f->mlx, f->win);
 	exit(0);
 }
 

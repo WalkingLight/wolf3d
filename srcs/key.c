@@ -43,7 +43,7 @@ static int	ft_rotate(int keycode, double tmp_dir, double tmp_plane, t_var *f)
 int			key_press(int keycode, t_var *f)
 {
 	if (keycode == 53)
-		closeProg(f);
+		ft_close();
 	if (keycode == 126 || keycode == 13)
 	{
 		if (f->map[(int)(f->player.xpos + f->player.xdir * 0.2)]

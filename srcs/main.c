@@ -12,75 +12,103 @@
 
 #include "ft_wolf3d.h"
 
-int				check_map(char *file)
-{
-	int		fd;
-	int		num;
-	int		i;
-	char	*line;
-
-	num = 0;
-	if ((fd = open(file, O_RDONLY)) == -1)
-		return (-1);
-	while (get_next_line(fd, &line))
-	{
-		i = 0;
-		while (line[i] != '\0')
-		{
-			if (!(line[i] == '0' || line[i] == '1' || line[i] == 'x'))
-			{
-				ft_putendl_fd("error: invalid character in file", 2);
-				return (-1);
-			}
-			i++;
-		}
-		free(line);
-		num++;
-	}
-	close(fd);
-	return (num - 1);
-}
-
-int				get_map(t_var *f, char *file)
+int				ft_checkchar(char *buf)
 {
 	int		i;
-	int		fd;
-	char	*line;
 
-	if ((f->nbl = check_map(file)) == -1)
-		return (-1);
-	fd = open(file, O_RDONLY);
-	if (!(f->map = (char **)malloc(sizeof(char) * f->nbl)))
-		return (-1);
 	i = 0;
-	while (get_next_line(fd, &line))
+	while (buf[i] != '\0')
+		i++;
+	buf[i - 1] = '\0';
+	i = 0;
+	while (buf[i])
 	{
-		if (!(f->map[i] = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1))))
+		if (buf[i] != '\n' && buf[i] != '0' && buf[i] != '1'\
+				&& buf[i] != 'x' && buf[i] != '\0')
+		{
+			ft_putendl("error: invalid characters in map");
 			return (-1);
-		f->map[i] = ft_strcpy(f->map[i], line);
-		free(line);
+		}
 		i++;
 	}
-	close(fd);
-	return (1);
+	return (0);
+}
+
+static char		*ft_getbuf(char *file, int *nbl)
+{
+	int		fd;
+	char	*buf;
+	char	*line;
+
+	buf = ft_strnew(1);
+	if ((fd = open(file, O_RDONLY)) == -1)
+	{
+		ft_putendl(ft_strjoin("error: ", strerror(errno)));
+		return (NULL);
+	}
+
+	while (get_next_line(fd, &line) > 0 && (*nbl)++ > -1)
+	{
+		buf = ft_strjoin(ft_strjoin(buf, line), "\n");
+		free(line);
+	}
+	if (ft_checkchar(buf) == -1)
+		return (NULL);
+	if (close(fd) == -1)
+	{
+		ft_putendl(ft_strjoin("error: ", strerror(errno)));
+		return (NULL);
+	}
+	return (buf);
+}
+
+static char		**ft_getmap(char *buf, int nbl)
+{
+	int		i;
+	int		k;
+	int		j;
+	char	**map;
+
+	k = 0;
+	j = 0;
+	if (!buf)
+		return (NULL);
+	if (!(map = (char **)malloc(sizeof(char *) * nbl)))
+		return (NULL);
+	while (buf[k] != '\0' && j < nbl)
+	{
+		i = 0;
+		if (!(map[j] = (char *)malloc(sizeof(char) * ft_linelen(buf, k))))
+			return (NULL);
+		while (buf[k] != '\n' && buf[k] != '\0')
+			map[j][i++] = buf[k++];
+		map[j][i] = '\0';
+		k++;
+		j++;
+	}
+	return (map);
 }
 
 static t_var	*init_mlx(char *fd)
 {
 	t_var	*f;
+	char	*buf;
 	char	*name;
 
 	name = ft_strjoin("wolf3d :", fd);
 	if (!(f = (t_var *)malloc(sizeof(t_var))))
 		return (NULL);
+	f->nbl = 0;
 	f->mlx = mlx_init();
 	f->img = mlx_new_image(f->mlx, WIN_W, WIN_H);
 	f->win = mlx_new_window(f->mlx, WIN_W, WIN_H, name);
 	free(name);
 	f->imgdata = mlx_get_data_addr(f->img, &f->bpp, &f->size_line,
 			&f->endian);
-	if (get_map(f, fd) == -1)
+	buf = ft_getbuf(fd, &(f->nbl));
+	if ((f->map = ft_getmap(buf, f->nbl)) == NULL)
 		return (NULL);
+	free(buf);
 	if (ft_player_init(f) == -1)
 		return (NULL);
 	f->cam.xplane = 0.0;

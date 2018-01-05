@@ -28,7 +28,7 @@ SRCS = 	srcs/main.c	\
 OBJECTS = $(SRCS:.c=.o)
 
 $(NAME): $(LIB_DIR)/libft.a $(OBJECTS)
-	@gcc $(FLAGS) -L $(LIB_DIR) -l ft -o $@ $^ -lmlx -framework OpenGl -framework Appkit
+	@clang $(FLAGS) -L $(LIB_DIR) -l ft -o $@ $^ -lmlx -framework OpenGl -framework Appkit
 	@echo "$(OK)compiling [ $(NAME) ] success$(NONE)"
 
 $(LIB_DIR)/libft.a :
@@ -37,7 +37,7 @@ $(LIB_DIR)/libft.a :
 all: $(NAME)
 
 %.o: %.c $(HEADERS)/ft_wolf3d.h
-	@gcc $(FLAGS) -I $(HEADERS) -c $< -o $@
+	@clang $(FLAGS) -I $(HEADERS) -c $< -o $@
 
 bug:
 	gcc -Wall -Werror -Wextra -g -L libft -l ft libft/libft.a srcs/main.c srcs/draw.c srcs/tools.c srcs/raycast.c srcs/key.c -lmlx -framework OpenGl -framework Appkit

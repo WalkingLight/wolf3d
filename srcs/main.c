@@ -6,7 +6,7 @@
 /*   By: rheukelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 14:59:41 by rheukelm          #+#    #+#             */
-/*   Updated: 2017/07/04 14:59:43 by rheukelm         ###   ########.fr       */
+/*   Updated: 2018/01/08 11:19:04 by rheukelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static char		*ft_getbuf(char *file, int *nbl)
 		ft_putendl(ft_strjoin("error: ", strerror(errno)));
 		return (NULL);
 	}
-
 	while (get_next_line(fd, &line) > 0 && (*nbl)++ > -1)
 	{
 		buf = ft_strjoin(ft_strjoin(buf, line), "\n");

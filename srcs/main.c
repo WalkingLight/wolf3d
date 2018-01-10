@@ -6,7 +6,7 @@
 /*   By: rheukelm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 14:59:41 by rheukelm          #+#    #+#             */
-/*   Updated: 2018/01/08 11:19:04 by rheukelm         ###   ########.fr       */
+/*   Updated: 2018/01/10 13:31:13 by rheukelm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,21 +97,21 @@ static t_var	*init_mlx(char *fd)
 	name = ft_strjoin("wolf3d :", fd);
 	if (!(f = (t_var *)malloc(sizeof(t_var))))
 		return (NULL);
-	f->nbl = 0;
-	f->mlx = mlx_init();
-	f->img = mlx_new_image(f->mlx, WIN_W, WIN_H);
-	f->win = mlx_new_window(f->mlx, WIN_W, WIN_H, name);
-	free(name);
-	f->imgdata = mlx_get_data_addr(f->img, &f->bpp, &f->size_line,
-			&f->endian);
 	buf = ft_getbuf(fd, &(f->nbl));
 	if ((f->map = ft_getmap(buf, f->nbl)) == NULL)
 		return (NULL);
 	free(buf);
 	if (ft_player_init(f) == -1)
 		return (NULL);
+	f->nbl = 0;
+	f->mlx = mlx_init();
+	f->img = mlx_new_image(f->mlx, WIN_W, WIN_H);
+	f->win = mlx_new_window(f->mlx, WIN_W, WIN_H, name);
+	f->imgdata = mlx_get_data_addr(f->img, &f->bpp, &f->size_line,
+			&f->endian);
 	f->cam.xplane = 0.0;
 	f->cam.yplane = 0.6;
+	free(name);
 	return (f);
 }
 

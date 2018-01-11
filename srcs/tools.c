@@ -17,6 +17,34 @@ int			ft_close(void)
 	exit(0);
 }
 
+int			ft_border(char *buf, int i)
+{
+	while (buf[i] != '\n')
+	{
+		if (buf[i] != '1')
+			return (-1);
+		i++;
+	}
+	while (buf[i])
+	{
+		i++;
+		if (buf[i] != '1')
+			return (-1);
+		while (buf[i] != '\0' && buf[i] != '\n')
+			i++;
+		if (buf[i - 1] != '1')
+			return (-1);
+	}
+	i--;
+	while (buf[i] != '\n')
+	{
+		if (buf[i] != '1')
+			return (-1);
+		i--;
+	}
+	return (0);
+}
+
 int			ft_player_init(t_var *f)
 {
 	int		j;

@@ -85,5 +85,6 @@ void			ft_draw(t_var *f);
 void			ft_raycast(t_var *f);
 void			ft_print(char **arr);
 int				ft_close(void);
+int				ft_border(char *buf, int i);
 
 #endif

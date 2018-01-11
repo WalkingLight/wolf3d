@@ -23,14 +23,18 @@ int				ft_checkchar(char *buf)
 	i = 0;
 	while (buf[i])
 	{
-		printf("check char %d -> %c\n", i, buf[i]);
 		if (buf[i] != '\n' && buf[i] != '0' && buf[i] != '1'\
 				&& buf[i] != 'x' && buf[i] != '\0')
 		{
-			ft_putendl("error: invalid characters in map");
+			ft_putendl_fd("error: invalid characters in map", 2);
 			return (-1);
 		}
 		i++;
+	}
+	if (ft_border(buf, 0) == -1)
+	{
+		ft_putendl_fd("error: please check map borders", 2);
+		return (-1);
 	}
 	return (0);
 }
@@ -52,6 +56,8 @@ static char		*ft_getbuf(char *file, int *nbl)
 		buf = ft_strjoin(ft_strjoin(buf, line), "\n");
 		free(line);
 	}
+	if (ft_strlen(buf) == 0)
+		return (NULL);
 	if (ft_checkchar(buf) == -1)
 		return (NULL);
 	if (close(fd) == -1)
@@ -102,11 +108,8 @@ static t_var	*init_mlx(char *fd)
 	f->win = mlx_new_window(f->mlx, WIN_W, WIN_H, ft_strjoin("wolf3d :", fd));
 	f->imgdata = mlx_get_data_addr(f->img, &f->bpp, &f->size_line,
 			&f->endian);
-	if (ft_strlen(buf = ft_getbuf(fd, &(f->nbl))) == 0)
-	{
-		ft_putendl_fd("error: Cannot read map", 2);
+	if ((buf = ft_getbuf(fd, &(f->nbl))) == 0)
 		return (NULL);
-	}
 	if ((f->map = ft_getmap(buf, f->nbl)) == NULL)
 		return (NULL);
 	free(buf);

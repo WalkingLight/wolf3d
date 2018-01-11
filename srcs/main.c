@@ -23,6 +23,7 @@ int				ft_checkchar(char *buf)
 	i = 0;
 	while (buf[i])
 	{
+		printf("check char %d -> %c\n", i, buf[i]);
 		if (buf[i] != '\n' && buf[i] != '0' && buf[i] != '1'\
 				&& buf[i] != 'x' && buf[i] != '\0')
 		{
@@ -92,19 +93,20 @@ static t_var	*init_mlx(char *fd)
 {
 	t_var	*f;
 	char	*buf;
-	char	*name;
 
-	name = ft_strjoin("wolf3d :", fd);
 	if (!(f = (t_var *)malloc(sizeof(t_var))))
 		return (NULL);
 	f->nbl = 0;
 	f->mlx = mlx_init();
 	f->img = mlx_new_image(f->mlx, WIN_W, WIN_H);
-	f->win = mlx_new_window(f->mlx, WIN_W, WIN_H, name);
-	free(name);
+	f->win = mlx_new_window(f->mlx, WIN_W, WIN_H, ft_strjoin("wolf3d :", fd));
 	f->imgdata = mlx_get_data_addr(f->img, &f->bpp, &f->size_line,
 			&f->endian);
-	buf = ft_getbuf(fd, &(f->nbl));
+	if (ft_strlen(buf = ft_getbuf(fd, &(f->nbl))) == 0)
+	{
+		ft_putendl_fd("error: Cannot read map", 2);
+		return (NULL);
+	}
 	if ((f->map = ft_getmap(buf, f->nbl)) == NULL)
 		return (NULL);
 	free(buf);

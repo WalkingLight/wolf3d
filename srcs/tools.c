@@ -42,6 +42,7 @@ int			ft_border(char *buf, int i)
 			return (-1);
 		i--;
 	}
+	printf("finish check border\n");
 	return (0);
 }
 
@@ -49,14 +50,17 @@ int			ft_player_init(t_var *f)
 {
 	int		j;
 	int		i;
-
+	printf("player_int\n");
 	i = 0;
 	j = 0;
 	while (f->map[j])
 	{
 		i = 0;
+		printf("bla\n");
 		while (f->map[j][i])
 		{
+			printf("bla2\n");
+			printf("check [%d][%d] -> %c\n", j, i, f->map[j][i]);
 			if (f->map[j][i] == 'x')
 			{
 				f->player.xpos = j;
@@ -65,9 +69,12 @@ int			ft_player_init(t_var *f)
 				f->player.ydir = 0;
 				return (0);
 			}
+			printf("here\n");
 			i++;
 		}
+		printf("also here\n");
 		j++;
+		printf("j  value %d\n", j);
 	}
 	ft_putendl_fd("error: player not found in map", 2);
 	return (-1);
